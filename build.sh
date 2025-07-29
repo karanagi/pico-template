@@ -1,16 +1,20 @@
 #!/bin/bash
 
 build() {
+	if ! [[ -d build ]]; then
+		mkdir build
+	fi
+
 	cd build && \
 	cmake .. && \
-	DCMAKE_POLICY_VERSION_MINIMUM=3.5 make -j $(nproc)
+	CMAKE_POLICY_VERSION_MINIMUM=3.5 make -j "$(nproc)"
 }
 
 flash() {
 	devpath="$1"
 	mntpath="$2"
 	sudo mount "$devpath" "$mntpath" && \
-		sudo cp *.uf2 "$mntpath" && \
+		sudo cp ./*.uf2 "$mntpath" && \
 		sudo umount "$mntpath"
 }
 
