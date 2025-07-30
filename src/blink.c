@@ -1,6 +1,7 @@
 #include "pico/stdlib.h"
 
-#define LED_PIN		25
+#define LED_PIN			25
+#define SLEEP_TIME		1000
 
 void init();
 
@@ -14,7 +15,7 @@ main(void)
 	mask = (1 << LED_PIN);
 	while(1) {
 		gpio_xor_mask(mask);
-		sleep_ms(1000);
+		sleep_ms(SLEEP_TIME);
 	}
 }
 
